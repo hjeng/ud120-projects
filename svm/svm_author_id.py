@@ -28,18 +28,20 @@ features_train, features_test, labels_train, labels_test = preprocess()
 from sklearn.svm import SVC
 clf = SVC(kernel = "rbf", C = 10000) #C = 10000 gives better accuracy than 10, 100, 1000, and 100 000
 
-features_train = features_train[:len(features_train)/100]
-labels_train = labels_train[:len(labels_train)/100]
+#features_train = features_train[:len(features_train)/100]
+#labels_train = labels_train[:len(labels_train)/100]
 
 t0 = time()
 clf.fit(features_train, labels_train)
 print "Training time", round(time()-t0, 3), "s"
 
 t1 = time()
-pred = clf.predict(features_test[[50]])
+pred = clf.predict(features_test)
 print "Prediction time", round(time()-t1, 3), "s"
 
-print pred
+num_chris_emails = (pred == 1).sum()
+
+print "Number of Chris emails: ", num_chris_emails
 
 #from sklearn.metrics import accuracy_score
 #print accuracy_score(pred, labels_test)
