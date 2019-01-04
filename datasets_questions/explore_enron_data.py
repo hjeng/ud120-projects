@@ -38,3 +38,24 @@ print "There are", x,"persons of interest."
 poi = open("../final_project/poi_names.txt", 'r')
 poi_length = poi.readlines()
 print "There were", len(poi_length[2:]), "POIs in total."
+
+# What is the total value of stock belonging to James Prentice?
+tsv_james_prentice = enron_data["PRENTICE JAMES"]["total_stock_value"]
+print "The total stock value of James Prentice is %d" % (tsv_james_prentice)
+
+# How many email messages do we have from Wesley Colwell to persons of interest?
+wes_colwell_to_poi = enron_data["COLWELL WESLEY"]["from_this_person_to_poi"]
+print "There were %d emails from Wesley Colwell to persons of interest" % (wes_colwell_to_poi)
+
+# What is the value of stock options exercised by Jeffrey K Skilling?
+exer_stock_jeff_skilling = enron_data["SKILLING JEFFREY K"]["exercised_stock_options"]
+print "The value of stock options exercised by Jeffrey K Skilling is %d" % (exer_stock_jeff_skilling)
+
+# Between Lay, Skilling, and Fastow, who took home the most money? How much was it?
+total_payments_lay  = enron_data["LAY KENNETH L"]["total_payments"]
+total_payments_skilling  = enron_data["SKILLING JEFFREY K"]["total_payments"]
+total_payments_fastow  = enron_data["FASTOW ANDREW S"]["total_payments"]
+total_payments = {"Kenneth Lay" : total_payments_lay, "Jeffrey K Skilling" : total_payments_skilling, "Andrew Fastow" : total_payments_fastow}
+most_money_person = max(total_payments)
+most_money_value = total_payments[most_money_person]
+print "%s took home %d" % (most_money_person, most_money_value)
