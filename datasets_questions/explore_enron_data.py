@@ -17,6 +17,7 @@
 
 import pickle
 
+# Loading the E + F dataset
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
 # How many data points (people) are in the dataset?
@@ -59,3 +60,32 @@ total_payments = {"Kenneth Lay" : total_payments_lay, "Jeffrey K Skilling" : tot
 most_money_person = max(total_payments)
 most_money_value = total_payments[most_money_person]
 print "%s took home %d" % (most_money_person, most_money_value)
+
+# How many individuals in the enron dataset have a quantified salary? Known email address?
+quant_salary = 0
+for j in range(len(enron_data)):
+    if isinstance(enron_data.values()[j]['salary'], (int)) == True:
+        quant_salary += 1
+print "%d people have a quantified salary" % (quant_salary)
+
+has_email = 0
+for k in range(len(enron_data)):
+    if enron_data.values()[k]['email_address'] != 'NaN':
+        has_email += 1
+print "%d people have a known email" % (has_email)
+
+# How many people in the E + F dataset have "NaN" for their total payments? What percentage of people in the dataset as a whole is this?
+total_pay_nan = 0
+for l in range(len(enron_data)):
+    if enron_data.values()[l]['total_payments'] == 'NaN':
+        total_pay_nan += 1
+percent = 100.0 * float(total_pay_nan)/(len(enron_data))
+print "%d people have NaN for their total payments. This is %d%% of the whole." % (total_pay_nan, percent)
+
+# How many POIs in the E + F dataset have "NaN" for their total payments? What percentage of POI's as a whole is this?
+total_pay_poi_nan = 0
+for m in range(len(enron_data)):
+    if enron_data.values()[m]['total_payments'] == 'NaN' and enron_data.values()[m]['poi'] == True:
+        total_pay_poi_nan += 1
+percent_poi = 100.0 * float(total_pay_poi_nan)/(len(enron_data))
+print "%d persons of interest have NaN for their total payments. This is %d%% of the whole." % (total_pay_poi_nan, percent_poi)
